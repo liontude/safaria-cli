@@ -1,0 +1,74 @@
+name: Safaria Scan
+description: Find the AI models in your code and when they retire. Fail the build before a model you use goes away.
+author: Liontude
+branding:
+  icon: alert-triangle
+  color: orange
+
+inputs:
+  token:
+    description: A Safaria API key (Settings › API keys), stored as a secret.
+    required: true
+  path:
+    description: Folder to scan.
+    default: "."
+  fail-on:
+    description: "Fail the job when a model is retired (retired), has a retirement date (deprecated), or retires within that many days (30d). Empty: never fail."
+    default: ""
+  sync:
+    description: Track what it finds in your Safaria space, to get alerts.
+    default: "false"
+  project:
+    description: With sync, also put what it finds in this project.
+    default: ""
+  sarif-file:
+    description: Also write a SARIF report here, for GitHub code scanning (github/codeql-action/upload-sarif). Empty to skip.
+    default: ""
+  version:
+    description: The safaria version to use (0.4.0), or latest.
+    default: latest
+
+outputs:
+  sarif-file:
+    description: The SARIF report, if one was asked for.
+    value: ${{ inputs.sarif-file }}
+
+runs:
+  using: composite
+  steps:
+    - name: Install safaria
+      shell: bash
+      env:
+        SAFARIA_INSTALL_DIR: ${{ runner.temp }}/safaria/bin
+        SAFARIA_VERSION: ${{ inputs.version }}
+      run: |
+        if [ "$SAFARIA_VERSION" != "latest" ]; then
+          export SAFARIA_RELEASES_URL="https://github.com/liontude/safaria-cli/releases/download/v${SAFARIA_VERSION#v}"
+        fi
+        if [ "$RUNNER_OS" = "Windows" ]; then
+          echo "::error::safaria's action runs on Linux and macOS runners for now."
+          exit 1
+        fi
+        curl -fsSL https://safaria.com/install.sh | sh
+        echo "$SAFARIA_INSTALL_DIR" >> "$GITHUB_PATH"
+
+    - name: Scan
+      shell: bash
+      env:
+        SAFARIA_TOKEN: ${{ inputs.token }}
+        SCAN_PATH: ${{ inputs.path }}
+        FAIL_ON: ${{ inputs.fail-on }}
+        SYNC: ${{ inputs.sync }}
+        PROJECT: ${{ inputs.project }}
+        SARIF_FILE: ${{ inputs.sarif-file }}
+      run: |
+        args=("$SCAN_PATH")
+        [ -n "$FAIL_ON" ] && args+=(--fail-on "$FAIL_ON")
+        [ "$SYNC" = "true" ] && args+=(--sync)
+        [ -n "$PROJECT" ] && args+=(--project "$PROJECT")
+        status=0
+        safaria scan "${args[@]}" || status=$?
+        if [ -n "$SARIF_FILE" ]; then
+          safaria scan "$SCAN_PATH" --format sarif > "$SARIF_FILE" || true
+        fi
+        exit $status
