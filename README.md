@@ -29,6 +29,9 @@ Create an API key in Safaria (Settings › API keys), save it as the
     sync: true # track what it finds, to get alerts
 ```
 
+Each repository that runs it takes one of your plan's places: Free covers 1,
+Pro 10 and Team all of them. Safaria on your own computer doesn't count.
+
 With GitHub code scanning, upload the SARIF report too:
 
 ```yaml
