@@ -60,6 +60,19 @@ This repository holds the releases (binaries for macOS, Linux and Windows, with
 their `SHA256SUMS`) and the GitHub Action. The source code will be published
 here later. Using the binaries is subject to [Safaria's terms](https://safaria.com/terms).
 
+## Verify a download
+
+Each release's `SHA256SUMS` is signed by Safaria (`SHA256SUMS.sig`). The
+installers and `safaria update` check it for you; to check it by hand:
+
+```sh
+base=https://github.com/liontude/safaria-cli/releases/latest/download
+curl -fsSLO "$base/SHA256SUMS" -fsSLO "$base/SHA256SUMS.sig"
+curl -fsSL https://safaria.com/safaria-release.pem -o safaria-release.pem
+openssl dgst -sha256 -verify safaria-release.pem -signature SHA256SUMS.sig SHA256SUMS
+sha256sum -c SHA256SUMS --ignore-missing
+```
+
 ## License
 
 Not open source. You can read the code and use the official binaries and this
