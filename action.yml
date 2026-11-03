@@ -44,6 +44,7 @@ runs:
       run: |
         if [ "$SAFARIA_VERSION" != "latest" ]; then
           export SAFARIA_RELEASES_URL="https://github.com/liontude/safaria-cli/releases/download/v${SAFARIA_VERSION#v}"
+          case "${SAFARIA_VERSION#v}" in 0.[0-4].*) export SAFARIA_ALLOW_UNSIGNED=1 ;; esac
         fi
         if [ "$RUNNER_OS" = "Windows" ]; then
           echo "::error::safaria's action runs on Linux and macOS runners for now."
