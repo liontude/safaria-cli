@@ -59,3 +59,9 @@ Linux and macOS runners.
 This repository holds the releases (binaries for macOS, Linux and Windows, with
 their `SHA256SUMS`) and the GitHub Action. The source code will be published
 here later. Using the binaries is subject to [Safaria's terms](https://safaria.com/terms).
+
+## License
+
+Not open source. You can read the code and use the official binaries and this
+action with Safaria; you can't copy, modify or redistribute them. See
+[LICENSE](LICENSE).
