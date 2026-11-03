@@ -62,6 +62,10 @@ runs:
         PROJECT: ${{ inputs.project }}
         SARIF_FILE: ${{ inputs.sarif-file }}
       run: |
+        if [ -z "$SAFARIA_TOKEN" ]; then
+          echo "::error::No Safaria API key: create one in Settings › API keys on safaria.com and save it as the SAFARIA_TOKEN secret of this repository."
+          exit 2
+        fi
         args=("$SCAN_PATH")
         [ -n "$FAIL_ON" ] && args+=(--fail-on "$FAIL_ON")
         [ "$SYNC" = "true" ] && args+=(--sync)
