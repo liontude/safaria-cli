@@ -1,12 +1,48 @@
+Safaria CLI License
+
 Copyright (c) 2026 Liontude LLC. All rights reserved.
 
-The safaria binaries published in this repository's releases are provided for
-use with Safaria (https://safaria.com) under Safaria's Terms of Service
-(https://safaria.com/terms).
+This license covers the Safaria CLI ("safaria"): its source code, the binaries
+published in the releases of https://github.com/liontude/safaria-cli, the
+GitHub Action and the documentation (together, the "Software"). The Software
+is made available so you can see exactly what runs on your machine and in your
+CI. It is not open source.
 
-No license is granted to copy, modify, redistribute, sublicense or sell the
-binaries, or to use them to build a competing product or service, except as
-those Terms allow.
+1. What you may do
 
-THE BINARIES ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, TO THE EXTENT PERMITTED BY LAW.
+   a. Read and review the source code, including to audit its security, and
+      report problems to Liontude.
+
+   b. Download, install and run the official binaries and the GitHub Action
+      published by Liontude, for your own use or your organization's, with
+      Safaria (https://safaria.com) and under Safaria's Terms of Service
+      (https://safaria.com/terms).
+
+2. What you may not do, unless Liontude allows it in writing
+
+   a. Copy the source code, in whole or in substantial part, other than as
+      needed to view it.
+
+   b. Modify it, translate it, or create derivative works based on it.
+
+   c. Build, publish, distribute, sublicense, sell, rent or host the Software,
+      the source code or anything built from it.
+
+   d. Use the Software to build or offer a product or service that competes
+      with Safaria.
+
+   e. Remove or change this notice, or work around the sign-in, plan limits or
+      other technical limits of the Software or of Safaria.
+
+3. Ending
+
+   Your rights under this license end at once if you break it, or when your
+   right to use Safaria ends.
+
+4. No warranty
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+   PURPOSE AND NON-INFRINGEMENT. TO THE EXTENT PERMITTED BY LAW, LIONTUDE IS
+   NOT LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM THE
+   SOFTWARE OR ITS USE.
